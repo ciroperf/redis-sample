@@ -11,6 +11,9 @@ grafici pronti per una presentazione.
 Chi deve motivare (o mettere in discussione) l'introduzione di Redis come
 cache in un'architettura esistente, con dati alla mano invece che opinioni.
 
+Per il contesto su cos'e' Redis, quando conviene come cache e quando no,
+si veda [`docs/redis-overview.md`](docs/redis-overview.md).
+
 ## Stack
 
 - Python 3.12, FastAPI (API dimostrativa) + redis-py
