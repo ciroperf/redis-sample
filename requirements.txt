@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+redis
+httpx
+requests
+matplotlib
+pytest
+fakeredis
