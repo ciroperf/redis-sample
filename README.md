@@ -30,6 +30,21 @@ un'istanza Docker o dall'Azure Cache for Redis creata via Terraform) prima di
 avviare l'app. Senza `REDIS_URL` l'endpoint cache si comporta come un
 no-op, utile per sviluppare senza dipendenze esterne.
 
+## Endpoint disponibili
+
+- `GET /health` — controllo di stato, risponde sempre 200.
+- `GET /data/nocache/{item_id}` — simula una sorgente dati lenta (50-150ms
+  di latenza artificiale), base per il confronto con la futura versione
+  con cache Redis.
+
+Esempio:
+
+```bash
+$ curl -w '\ntempo: %{time_total}s\n' http://127.0.0.1:8000/data/nocache/1
+{"item_id":1,"source":"nocache","value":42}
+tempo: 0.104s
+```
+
 ## Test
 
 ```bash
