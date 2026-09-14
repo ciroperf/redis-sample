@@ -8,4 +8,4 @@ version = "0.1.0"
 description = "Redis sample app"
 
 [tool.setuptools]
-packages = ["app"]
+packages = ["app", "benchmark"]
