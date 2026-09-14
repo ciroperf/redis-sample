@@ -15,7 +15,5 @@ def health():
 
 
 @app.get("/data/nocache/{item_id}")
-def get_data_nocache(item_id: int):
-    # Simula una sorgente dati lenta (es. query non ottimizzata su DB).
-    time.sleep(random.uniform(0.05, 0.15))
-    return {"item_id": item_id, "source": "nocache", "value": item_id * 42}
+def data_nocache(item_id: int):
+    return {"item_id": item_id, "source": "nocache", "value": 42}
