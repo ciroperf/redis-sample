@@ -34,8 +34,12 @@ no-op, utile per sviluppare senza dipendenze esterne.
 
 - `GET /health` — controllo di stato, risponde sempre 200.
 - `GET /data/nocache/{item_id}` — simula una sorgente dati lenta (50-150ms
-  di latenza artificiale), base per il confronto con la futura versione
-  con cache Redis.
+  di latenza artificiale), base per il confronto con la versione con cache
+  Redis.
+- `GET /data/cached/{item_id}` — stessa sorgente lenta, ma il risultato
+  viene letto/scritto su Redis con TTL di 30s prima di rifare il lavoro
+  costoso. Senza `REDIS_URL` impostata si comporta come `nocache` (nessun
+  crash, nessuna dipendenza esterna richiesta in sviluppo).
 
 Esempio:
 
@@ -43,6 +47,14 @@ Esempio:
 $ curl -w '\ntempo: %{time_total}s\n' http://127.0.0.1:8000/data/nocache/1
 {"item_id":1,"source":"nocache","value":42}
 tempo: 0.104s
+
+$ curl -w '\ntempo: %{time_total}s\n' http://127.0.0.1:8000/data/cached/1
+{"item_id":1,"value":42,"source":"cached"}
+tempo: 0.098s
+
+$ curl -w '\ntempo: %{time_total}s\n' http://127.0.0.1:8000/data/cached/1
+{"item_id":1,"value":42,"source":"cached"}
+tempo: 0.002s
 ```
 
 ## Test
