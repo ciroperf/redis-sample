@@ -55,3 +55,4 @@ yarn-error.log*
 
 # --- output generati ---------------------------------------------
 benchmark/results.csv
+charts/output/
