@@ -70,6 +70,22 @@ python benchmark/run_benchmark.py   # produce un CSV con i tempi di risposta
 python charts/generate_charts.py    # legge il CSV e genera i grafici KPI
 ```
 
+`run_benchmark.py` accetta `--base-url` (default `http://localhost:8000`),
+`-n/--requests` (default 50) e `--output` (default `benchmark/results.csv`).
+Esegue N richieste su `/data/nocache/{id}` e N su `/data/cached/{id}`,
+scrive `benchmark/results.csv` con colonne
+`endpoint,item_id,request_index,response_time_ms` e stampa un riepilogo:
+
+```bash
+$ python benchmark/run_benchmark.py -n 20
+Risultati salvati in benchmark/results.csv
+/data/nocache: mean=109.89ms p50=108.59ms p95=135.67ms
+/data/cached: mean=7.82ms p50=1.54ms p95=2.07ms
+```
+
+(esempio con `REDIS_URL` configurata; senza cache reale `/data/cached` si
+comporta come `/data/nocache`, come descritto sopra).
+
 ## Infrastruttura (Azure)
 
 ```bash
