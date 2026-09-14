@@ -78,8 +78,18 @@ terraform init
 terraform apply
 ```
 
-Crea un resource group e un'istanza Azure Cache for Redis da usare per i
-test contro un servizio reale (non solo in locale).
+Crea un resource group e un'istanza Azure Cache for Redis (tier Basic) da
+usare per i test contro un servizio reale (non solo in locale).
+
+Per passare l'istanza appena creata a `REDIS_URL`:
+
+```bash
+export REDIS_URL="rediss://:$(terraform output -raw redis_primary_access_key)@$(terraform output -raw redis_hostname):$(terraform output -raw redis_ssl_port)/0"
+```
+
+Lo schema `rediss://` forza la connessione TLS, richiesta dall'istanza Azure
+(porta SSL, TLS minimo 1.2). Per distruggere le risorse a fine test:
+`terraform destroy`.
 
 ## Screenshot
 
