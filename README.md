@@ -86,6 +86,17 @@ Risultati salvati in benchmark/results.csv
 (esempio con `REDIS_URL` configurata; senza cache reale `/data/cached` si
 comporta come `/data/nocache`, come descritto sopra).
 
+`generate_charts.py` accetta il percorso del CSV come primo argomento
+(default `benchmark/results.csv`) e `--output-dir` (default `charts/output`).
+Legge il CSV e genera tre grafici PNG, pronti per una presentazione:
+
+- `mean_response_time.png` — tempo medio di risposta, cached vs nocache.
+- `percentiles.png` — percentili p50/p95/p99 per i due endpoint.
+- `response_time_distribution.png` — distribuzione dei tempi di risposta.
+
+Se il CSV non esiste ancora (nessun benchmark eseguito), lo script stampa un
+messaggio invece di terminare con uno stack trace.
+
 ## Infrastruttura (Azure)
 
 ```bash
@@ -109,4 +120,7 @@ Lo schema `rediss://` forza la connessione TLS, richiesta dall'istanza Azure
 
 ## Screenshot
 
-_(da aggiungere)_
+Esempio di grafico generato da `charts/generate_charts.py` (tempo medio di
+risposta, cached vs nocache):
+
+![Tempo medio di risposta: cache vs no cache](docs/img/mean_response_time_example.png)
