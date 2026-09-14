@@ -52,3 +52,6 @@ desktop.ini
 *.tmp
 npm-debug.log*
 yarn-error.log*
+
+# --- output generati ---------------------------------------------
+benchmark/results.csv
