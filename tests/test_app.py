@@ -1,14 +1,26 @@
 # Test dell'API: implementazione nei task del piano.
 
-import time
-
 import fakeredis
 from fastapi.testclient import TestClient
 
 import app.main as main_module
 from app.main import app
+from app.seed_data import PRODUCTS
 
 client = TestClient(app)
+
+
+def _expected_product(item_id: int, source: str) -> dict:
+    product = next(p for p in PRODUCTS if p["id"] == item_id)
+    return {
+        "item_id": product["id"],
+        "sku": product["sku"],
+        "name": product["name"],
+        "category": product["category"],
+        "price_eur": product["price_eur"],
+        "stock_quantity": product["stock_quantity"],
+        "source": source,
+    }
 
 
 def test_health():
@@ -18,13 +30,16 @@ def test_health():
 
 
 def test_data_nocache():
-    start = time.perf_counter()
     response = client.get("/data/nocache/1")
-    elapsed = time.perf_counter() - start
 
     assert response.status_code == 200
-    assert response.json() == {"item_id": 1, "source": "nocache", "value": 42}
-    assert elapsed > 0.05
+    assert response.json() == _expected_product(1, "nocache")
+
+
+def test_data_nocache_missing_item():
+    response = client.get("/data/nocache/999999")
+
+    assert response.status_code == 404
 
 
 def test_data_cached_without_redis_url(monkeypatch):
@@ -34,21 +49,21 @@ def test_data_cached_without_redis_url(monkeypatch):
     response = client.get("/data/cached/2")
 
     assert response.status_code == 200
-    assert response.json() == {"item_id": 2, "source": "cached", "value": 42}
+    assert response.json() == _expected_product(2, "cached")
 
 
 def test_data_cached_second_call_is_cache_hit(monkeypatch):
     monkeypatch.setattr(main_module, "redis_client", fakeredis.FakeRedis())
 
     call_count = 0
-    original_slow_lookup = main_module._slow_lookup
+    original_lookup_product = main_module._lookup_product
 
-    def counting_slow_lookup(item_id):
+    def counting_lookup_product(item_id):
         nonlocal call_count
         call_count += 1
-        return original_slow_lookup(item_id)
+        return original_lookup_product(item_id)
 
-    monkeypatch.setattr(main_module, "_slow_lookup", counting_slow_lookup)
+    monkeypatch.setattr(main_module, "_lookup_product", counting_lookup_product)
 
     first = client.get("/data/cached/3")
     second = client.get("/data/cached/3")
