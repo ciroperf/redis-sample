@@ -1,15 +1,16 @@
 # redis-sample
 
 Dimostra con numeri i vantaggi/svantaggi del caching Redis: API con e senza
-cache, benchmark strutturato, grafici KPI, Terraform per Azure Cache for Redis.
+cache su un catalogo prodotti reale (DB), benchmark strutturato, grafici
+KPI, Terraform per Azure Cache for Redis e Azure Database for PostgreSQL.
 
 Questo file viene letto a ogni run dell'agente. Tienilo sotto le 40 righe.
 
 ## Stack
 
-- Python 3.12, FastAPI + redis-py
+- Python 3.12, FastAPI + redis-py, SQLAlchemy per il DB (`DATABASE_URL`)
 - Terraform, provider `azurerm`
-- Test: `pytest` (usa `fakeredis`, nessun Redis reale richiesto)
+- Test: `pytest` (DB reale su SQLite temporaneo, `fakeredis` per la cache)
 - Avvio locale: `uvicorn app.main:app --reload`
 
 ## Regole
@@ -27,9 +28,10 @@ Questo file viene letto a ogni run dell'agente. Tienilo sotto le 40 righe.
 
 - Codice e identificatori in inglese, commenti in italiano.
 - Commit in forma imperativa, una riga.
-- `app/` l'API dimostrativa, `benchmark/` raccoglie i dati in CSV,
-  `charts/` genera i grafici a partire dal CSV, `terraform/` l'infra Azure,
-  `docs/` la spiegazione di Redis.
+- `app/` l'API dimostrativa e il layer DB, `db/` schema e seed SQL del
+  catalogo, `benchmark/` raccoglie i dati in CSV, `charts/` genera i
+  grafici a partire dal CSV, `terraform/` l'infra Azure, `docs/` le guide
+  su Redis e sul collegamento al DB.
 
 ## Fatto quando
 

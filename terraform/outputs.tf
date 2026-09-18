@@ -13,3 +13,18 @@ output "redis_primary_access_key" {
   value       = azurerm_redis_cache.this.primary_access_key
   sensitive   = true
 }
+
+output "postgres_fqdn" {
+  description = "Hostname completo del server Azure Database for PostgreSQL."
+  value       = azurerm_postgresql_flexible_server.this.fqdn
+}
+
+output "postgres_database_name" {
+  description = "Nome del database applicativo (il catalogo prodotti)."
+  value       = azurerm_postgresql_flexible_server_database.catalog.name
+}
+
+output "postgres_admin_username" {
+  description = "Utente amministratore del server Postgres."
+  value       = var.postgres_admin_username
+}

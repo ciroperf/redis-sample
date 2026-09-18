@@ -7,3 +7,5 @@ matplotlib
 pytest
 fakeredis
 anyio
+sqlalchemy
+psycopg2-binary

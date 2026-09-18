@@ -1,0 +1,30 @@
+# Catalogo prodotti di riferimento: caso d'uso "e-commerce", la sorgente
+# dati reale che le API mettono in cache. Dataset fisso e deterministico,
+# cosi' i test e le demo confrontano sempre gli stessi numeri.
+
+PRODUCTS = [
+    {"id": 1, "sku": "ELEC-001", "name": "Mouse wireless", "category": "electronics", "price_eur": 19.99, "stock_quantity": 120},
+    {"id": 2, "sku": "ELEC-002", "name": "Tastiera meccanica", "category": "electronics", "price_eur": 74.90, "stock_quantity": 45},
+    {"id": 3, "sku": "ELEC-003", "name": "Monitor 27\" 4K", "category": "electronics", "price_eur": 329.00, "stock_quantity": 18},
+    {"id": 4, "sku": "ELEC-004", "name": "Webcam HD", "category": "electronics", "price_eur": 39.50, "stock_quantity": 60},
+    {"id": 5, "sku": "ELEC-005", "name": "Cuffie bluetooth", "category": "electronics", "price_eur": 89.99, "stock_quantity": 33},
+    {"id": 6, "sku": "ELEC-006", "name": "Hub USB-C 7 porte", "category": "electronics", "price_eur": 29.00, "stock_quantity": 80},
+    {"id": 7, "sku": "HOME-001", "name": "Lampada da scrivania LED", "category": "home", "price_eur": 24.99, "stock_quantity": 95},
+    {"id": 8, "sku": "HOME-002", "name": "Set 4 tazze in ceramica", "category": "home", "price_eur": 15.50, "stock_quantity": 150},
+    {"id": 9, "sku": "HOME-003", "name": "Tappeto soggiorno 160x230", "category": "home", "price_eur": 129.00, "stock_quantity": 12},
+    {"id": 10, "sku": "HOME-004", "name": "Organizer da cassetto", "category": "home", "price_eur": 9.90, "stock_quantity": 200},
+    {"id": 11, "sku": "HOME-005", "name": "Diffusore aromi", "category": "home", "price_eur": 34.90, "stock_quantity": 40},
+    {"id": 12, "sku": "HOME-006", "name": "Coperta in pile 200x220", "category": "home", "price_eur": 27.00, "stock_quantity": 70},
+    {"id": 13, "sku": "SPRT-001", "name": "Tappetino yoga", "category": "sports", "price_eur": 22.90, "stock_quantity": 85},
+    {"id": 14, "sku": "SPRT-002", "name": "Bottiglia termica 750ml", "category": "sports", "price_eur": 18.00, "stock_quantity": 110},
+    {"id": 15, "sku": "SPRT-003", "name": "Corda per saltare", "category": "sports", "price_eur": 12.50, "stock_quantity": 130},
+    {"id": 16, "sku": "SPRT-004", "name": "Guanti da palestra", "category": "sports", "price_eur": 16.90, "stock_quantity": 55},
+    {"id": 17, "sku": "SPRT-005", "name": "Zaino running 10L", "category": "sports", "price_eur": 44.00, "stock_quantity": 28},
+    {"id": 18, "sku": "SPRT-006", "name": "Fascia elastica fitness", "category": "sports", "price_eur": 9.99, "stock_quantity": 160},
+    {"id": 19, "sku": "GROC-001", "name": "Caffe' in grani 1kg", "category": "grocery", "price_eur": 14.90, "stock_quantity": 300},
+    {"id": 20, "sku": "GROC-002", "name": "Olio extravergine 1L", "category": "grocery", "price_eur": 11.50, "stock_quantity": 220},
+    {"id": 21, "sku": "GROC-003", "name": "Pasta artigianale 500g", "category": "grocery", "price_eur": 3.20, "stock_quantity": 400},
+    {"id": 22, "sku": "GROC-004", "name": "Miele biologico 400g", "category": "grocery", "price_eur": 8.90, "stock_quantity": 90},
+    {"id": 23, "sku": "GROC-005", "name": "Tisana relax 20 filtri", "category": "grocery", "price_eur": 5.50, "stock_quantity": 180},
+    {"id": 24, "sku": "GROC-006", "name": "Cioccolato fondente 100g", "category": "grocery", "price_eur": 3.90, "stock_quantity": 260},
+]
